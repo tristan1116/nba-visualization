@@ -16,6 +16,16 @@ const GALLERY = [
   ["fig08_球员出生地分布.png", "图8 出生地分布（加州 344 / 纽约 290 / 国际 439）"],
 ];
 
+/** 六种预测算法效果图（钱答辩稿同款：每种算法一张，R² 与报告表一致） */
+const PRED_FIGS = [
+  ["fig10_线性回归预测效果.png", "图10-1 线性回归（R²=0.9690）"],
+  ["fig10_岭回归预测效果.png", "图10-2 岭回归（R²=0.9690）"],
+  ["fig10_套索回归预测效果.png", "图10-3 套索回归（R²=0.9689）"],
+  ["fig10_决策树预测效果.png", "图10-4 决策树（R²=0.9567，最弱）"],
+  ["fig10_随机森林预测效果.png", "图10-5 随机森林（R²=0.9708）"],
+  ["fig10_梯度提升预测效果.png", "图10-6 梯度提升 GBRT（R²=0.9716，最优）"],
+];
+
 /** 通用表格渲染（首列为行标签，其余为数值列） */
 function tableHTML(title, rows, note = "") {
   if (!rows?.length) return "";
@@ -106,10 +116,14 @@ async function main() {
       `<section class="section" id="s-cluster">
         <div class="head"><h2>聚类分析 · KMeans（K=${clusters.k}）</h2>
           <span class="count">样本 ${fmt(clusters.samples)} 人（生涯 ≥3 赛季）· 轮廓系数 ${clusters.silhouette}</span></div>
-        <figure class="panel">
-          <img src="figures/fig09_KMeans聚类散点图.png" alt="KMeans 聚类散点图" style="width:100%">
-          <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">
-            图9 KMeans 聚类（得分 × 篮板平面投影；5 簇风格接近实际篮球位置语义）</figcaption></figure>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <figure class="panel"><img src="figures/fig09_KMeans聚类散点图.png?v=20260907b" alt="KMeans 聚类散点图" style="width:100%">
+            <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">图9-1 KMeans 聚类（K=5，轮廓 0.276，5 簇）</figcaption></figure>
+          <figure class="panel"><img src="figures/fig09_GMM聚类散点图.png?v=20260907b" alt="GMM 聚类散点图" style="width:100%">
+            <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">图9-2 GMM 聚类（K=5，轮廓 0.125，软聚类质量明显偏低）</figcaption></figure>
+          <figure class="panel"><img src="figures/fig09_DBSCAN聚类散点图.png?v=20260907b" alt="DBSCAN 聚类散点图" style="width:100%">
+            <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">图9-3 DBSCAN 聚类（eps=1.1，轮廓 0.380，仅 2 簇；灰点=噪声 6.5%）</figcaption></figure>
+        </div>
         ${tableHTML("三种聚类算法横向对比", clusters.compare,
           "为什么选 KMeans：簇数可由领域知识设定、不丢弃球员、质心可解读")}
         <div class="panel" style="margin-top:18px">
@@ -146,11 +160,10 @@ async function main() {
           <div class="tips"><b>结论</b>：线性回归 R²=${fmt(stats.predict[0]?.R2 ?? 0, 4)} 已接近集成算法 → 得分与所选特征基本线性；
             集成（森林/GBRT）普遍优于单决策树；<b>GBRT 最优</b>（R²=${esc(cards.predict_best?.R2 ?? "-")}）</div>
         </div>
-        <div class="twocol" style="margin-top:18px">
-          <figure class="panel"><img src="figures/fig10_线性回归预测效果.png" alt="线性回归预测效果" style="width:100%">
-            <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">图10-1 线性回归预测效果</figcaption></figure>
-          <figure class="panel"><img src="figures/fig10_随机森林预测效果.png" alt="随机森林预测效果" style="width:100%">
-            <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">图10-2 随机森林预测效果</figcaption></figure>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
+          ${PRED_FIGS.map(([f, cap]) => `
+            <figure class="panel"><img src="figures/${f}?v=20260907b" alt="${esc(cap)}" style="width:100%">
+              <figcaption style="color:#8ca3c9;font-size:12.5px;margin-top:10px">${esc(cap)}</figcaption></figure>`).join("")}
         </div>
       </section>`);
   } catch (e) {

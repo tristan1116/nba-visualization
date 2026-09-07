@@ -1,13 +1,13 @@
 # NBA 球员可视化网站
 
-杭电《软件开发实践1》大作业《NBA 球员信息统计及可视化》的浏览器端可视化前端（自研加分项）。
+杭电《软件开发实践1》大作业《NBA 球员信息统计及可视化》的浏览器端可视化前端。
 
 ## 技术栈
 
 - 原生 HTML5 + CSS3 + 原生 JS（ES Modules），零构建链
-- ECharts 5.x 本地打包（`vendor/echarts.min.js`，断网可演示）
-- 数据层：`web/data/` 六类 JSON（由项目 `web_generate.py` 从分析模块离线生成，与命令行口径完全一致）
-- 接口层：`js/api.js` REST 风格契约（未来升级 C++ Drogon 后端时仅替换 fetch URL）
+- ECharts 5.x 
+- 数据层：`web/data/` 六类 JSON（由项目 `web_generate.py` 从分析模块离线生成，与命令行口径一致）
+- 接口层：`js/api.js` REST 风格契约
 - 主题：暗夜红金（#070F1E / #C8102E / #FDB927）
 
 ## 页面
