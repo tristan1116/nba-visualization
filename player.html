@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>球员详情 · NBA 球员数据中心</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c8102e'/%3E%3Ccircle cx='16' cy='16' r='15' fill='none' stroke='%23fdb927' stroke-width='2'/%3E%3Cpath d='M1 22 Q16 16 31 22 M16 1 V31 M8 8 Q16 16 24 8' fill='none' stroke='%23fdb927' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html"><span class="dot">🏀</span>NBA 球员数据中心</a>
+      <nav>
+        <a class="on" href="index.html">首页</a>
+        <a href="overview.html">数据总览</a>
+        <a href="compare.html">双星对比</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="backbar">
+      <a href="index.html">← 返回首页</a>
+      <span id="crumb"></span>
+    </div>
+
+    <!-- 汇总卡 -->
+    <section class="summary" id="summary">
+      <span id="summary-skeleton" style="grid-column: 1 / -1">
+        <div class="skeleton" style="height: 132px"></div>
+      </span>
+    </section>
+
+    <!-- 左：走势图 / 右：雷达 + 转会 -->
+    <section class="twocol">
+      <div>
+        <div class="panel">
+          <h3 id="line-title">生涯走势<span class="tag" id="line-tag"></span></h3>
+          <div class="chart" id="lineChart"></div>
+        </div>
+        <div class="panel" style="margin-top: 18px">
+          <h3>转会前后对比<span class="tag" id="transfer-tag"></span></h3>
+          <div id="transfers"></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>7 维能力雷达<span class="tag">相对联盟平均</span></h3>
+          <div class="chart small" id="radarChart"></div>
+        </div>
+        <div class="panel" style="margin-top: 18px">
+          <h3>聚类归属<span class="tag" id="cluster-tag"></span></h3>
+          <div id="cluster"></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="margin-top: 24px; text-align: center">
+      <a class="go big" href="#" id="vs-link" style="
+        display: inline-flex; gap: 8px; align-items: center;
+        background: linear-gradient(95deg, var(--red), var(--red2));
+        color: #fff; font-weight: 800; font-size: 15px;
+        border-radius: 60px; padding: 13px 34px;
+        box-shadow: 0 10px 34px rgba(200, 16, 46, 0.4);">
+        🆚 与他对比（双星雷达）
+      </a>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>数据源：Kaggle NBA Players Stats（1950–2017）· 分析内核：Python pandas / scikit-learn</span>
+      <span>可视化：ECharts 本地打包 · 前端零构建 · 本页仅用于课程学习演示</span>
+    </div>
+  </footer>
+
+  <script src="vendor/echarts.min.js"></script>
+  <script type="module" src="js/player.js?v=20260907f"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA 球员数据中心 · 信息统计与可视化</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c8102e'/%3E%3Ccircle cx='16' cy='16' r='15' fill='none' stroke='%23fdb927' stroke-width='2'/%3E%3Cpath d='M1 22 Q16 16 31 22 M16 1 V31 M8 8 Q16 16 24 8' fill='none' stroke='%23fdb927' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 顶部导航（红色渐变） -->
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html"><span class="dot">🏀</span>NBA 球员数据中心</a>
+      <nav>
+        <a class="on" href="index.html">首页</a>
+        <a href="overview.html">数据总览</a>
+        <a href="compare.html">双星对比</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Hero：标题 + 数据卡 + 搜索 -->
+    <section class="hero">
+      <span class="kicker">Stats · Visual · Interactive</span>
+      <h1>NBA PLAYERS DATA CENTER</h1>
+      <p class="sub">
+        基于 <b>79,000+ 条赛季数据</b>的统计、数据挖掘与交互式可视化 ——
+        覆盖 <b>1950–2017</b> 全部赛季，输入任意球员名即刻探索生涯全景。
+      </p>
+
+      <div class="cards" id="cards"></div>
+
+      <div class="search-zone">
+        <div class="search-box">
+          <span class="ic">🔎</span>
+          <input id="q" type="text" autocomplete="off" spellcheck="false"
+                 placeholder="输入球员名 / 中文名 / 拼音缩写，如 iverson、乔丹、curry...">
+          <button class="go" id="q-go" type="button">GO</button>
+        </div>
+        <div class="picker" id="search-picker" hidden></div>
+        <div class="search-tip" id="search-tip">
+          支持模糊匹配：<b>jordan</b> → 迈克尔·乔丹 · <b>yao</b> → 姚明 · <b>唯一命中</b>回车直达，<b>多命中</b>弹出候选供点击选择
+        </div>
+      </div>
+    </section>
+
+    <!-- 名人堂快捷入口 -->
+    <section class="section">
+      <div class="head">
+        <h2>名人堂快捷入口</h2>
+        <span class="count" id="hall-count"></span>
+      </div>
+      <div class="hall" id="hall"></div>
+    </section>
+
+    <!-- 快速通道：总览 / 对比 -->
+    <section class="section">
+      <div class="head">
+        <h2>快速通道</h2>
+        <span class="count">完整分析成果 · 球星 PK</span>
+      </div>
+      <div class="quick">
+        <a class="qcard" href="overview.html">
+          <span class="q-ic">📊</span>
+          <div>
+            <div class="q-t">数据总览</div>
+            <div class="q-d">4 张统计表 · 图 1~10 · 聚类/预测算法对比</div>
+          </div>
+          <span class="q-go">→</span>
+        </a>
+        <a class="qcard" href="compare.html">
+          <span class="q-ic">🆚</span>
+          <div>
+            <div class="q-t">双星对比</div>
+            <div class="q-d">两位球星 7 维生涯指标雷达 PK · 自动点评</div>
+          </div>
+          <span class="q-go">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 全量球员列表 -->
+    <section class="section">
+      <div class="head">
+        <h2>全量球员榜</h2>
+        <span class="count" id="list-count"></span>
+      </div>
+      <div class="filter" id="filter"></div>
+      <div class="ptable" id="table"></div>
+      <div class="pager" id="pager"></div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>数据源：Kaggle NBA Players Stats（1950–2017）· 分析内核：Python pandas / scikit-learn</span>
+      <span>可视化：ECharts 本地打包 · 前端零构建 · 本页仅用于课程学习演示</span>
+    </div>
+  </footer>
+
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>
